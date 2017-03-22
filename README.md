@@ -12,5 +12,5 @@ PORT=8000 ./server.sh
 ### client side
 ```
 npm install
-PORT=8000 ./client.sh
+PORT=8000 ./wsbench.sh
 ```
