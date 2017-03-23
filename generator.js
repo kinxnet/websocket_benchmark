@@ -1,9 +1,12 @@
+var data = require("randomstring").generate(1024);
 var maxMs = -1, minMs = Number.MAX_SAFE_INTEGER;
+
 setInterval(() => {
   if (maxMs === -1) { return; }
   console.log('Max=', maxMs, 'ms', 'Min=', minMs, 'ms');
   maxMs = -1; minMs = Number.MAX_SAFE_INTEGER;
 }, 1000)
+
 module.exports = {
 	/**
 	* Before connection (optional, just for faye)
@@ -33,11 +36,11 @@ module.exports = {
 		// WAMP session
 		// client.subscribe('com.myapp.hello').then(function(args) { });
 		setInterval(() => {
-			client.emit('message', (new Date()).getTime())
+			client.emit('message', {data: data, time: (new Date()).getTime()})
 		}, 1000);
 
-		client.on('message', (data) => {
-      var ms = (new Date()).getTime() - data;
+		client.on('message', (msg) => {
+      var ms = (new Date()).getTime() - msg.time;
       maxMs = Math.max(maxMs, ms);
       minMs = Math.min(minMs, ms);
 			//console.log('message', data, ':', (new Date()).getTime() - data, 'ms');
