@@ -5,7 +5,7 @@ const PORT= process.env.PORT || 8000;
 
 io.on('connection', function(client){
   client.on('message', function(data){
-    console.log('message', data);
+    //console.log('message', data);
     client.emit('message', data);
   });
   client.on('disconnect', function(){

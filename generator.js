@@ -1,3 +1,8 @@
+var maxMs = -1, minMs = Number.MAX_SAFE_INTEGER;
+setInterval(() => {
+  if (maxMs === -1) { return; }
+  console.log('Max=', maxMs, 'ms', 'Min=', minMs, 'ms');
+}, 1000)
 module.exports = {
 	/**
 	* Before connection (optional, just for faye)
@@ -31,7 +36,10 @@ module.exports = {
 		}, 1000);
 
 		client.on('message', (data) => {
-			console.log('message', data, ':', (new Date()).getTime() - data, 'ms');
+      var ms = (new Date()).getTime() - data;
+      maxMs = Math.max(maxMs, ms);
+      minMs = Math.min(minMs, ms);
+			//console.log('message', data, ':', (new Date()).getTime() - data, 'ms');
 		});
 
 		done();
