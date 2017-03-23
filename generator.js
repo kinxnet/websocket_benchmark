@@ -2,6 +2,7 @@ var maxMs = -1, minMs = Number.MAX_SAFE_INTEGER;
 setInterval(() => {
   if (maxMs === -1) { return; }
   console.log('Max=', maxMs, 'ms', 'Min=', minMs, 'ms');
+  maxMs = -1; minMs = Number.MAX_SAFE_INTEGER;
 }, 1000)
 module.exports = {
 	/**
