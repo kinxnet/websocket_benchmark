@@ -6,4 +6,6 @@
 [ -z "GENERATOR" ] && PORT=generator.js
 
 [ ! -d ./node_modules ] && npm install
-./node_modules/.bin/websocket-bench -k -a ${AMOUNT} -c ${CONCURRENCY} -g ${GENERATOR} http://${HOST}:${PORT}
+
+LOG="./bench-$(date '+%Y%m%dT%H%M%S').log"
+./node_modules/.bin/websocket-bench -k -a ${AMOUNT} -c ${CONCURRENCY} -g ${GENERATOR} http://${HOST}:${PORT} > ${LOG} 2>>${LOG}
