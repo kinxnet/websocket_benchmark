@@ -1,11 +1,12 @@
 var data = require("randomstring").generate(1024);
 var maxMs = -1, minMs = Number.MAX_SAFE_INTEGER;
+var intervalMs = 5000;
 
 setInterval(() => {
   if (maxMs === -1) { return; }
   console.log('Max=', maxMs, 'ms', 'Min=', minMs, 'ms');
   maxMs = -1; minMs = Number.MAX_SAFE_INTEGER;
-}, 5000)
+}, intervalMs)
 
 module.exports = {
 	/**
@@ -37,7 +38,7 @@ module.exports = {
 		// client.subscribe('com.myapp.hello').then(function(args) { });
 		setInterval(() => {
 			client.emit('message', {data: data, time: (new Date()).getTime()})
-		}, 1000);
+		}, intervalMs);
 
 		client.on('message', (msg) => {
       var ms = (new Date()).getTime() - msg.time;
